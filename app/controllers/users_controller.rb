@@ -4,13 +4,16 @@ class UsersController < ApplicationController
   end
 
   def show
-  	@user=User.find_by(:id => params[:id])
-  	if current_user.office_id == 13
-  	@documents = Document.where(:email => current_user.email).order('created_at Desc')
+    #@user=User.find_by(:id => params[:id])
+   
+    if current_user.office.office_name == "Guest" 
+      
+  	   @documents = Document.where(:email => current_user.email).order('created_at Desc')
     else
+      binding.pry
 	#@comments = Comment.where(:office_id => current_user.office_id && status_flag: false).order(:created_at => :desc)
 	#Client.where("orders_count = ? AND locked = ?", params[:orders], false)
-	@comments = Comment.where("office_id = ? AND status_flag = ?" , current_user.office_id , false).order(:created_at => :desc)
+	 @comments = Comment.where("office_id = ? AND status_flag = ?" , current_user.office_id , false).order(:created_at => :desc)
 	#@documents = Document.where(:id  => @comments.id)
     end
   end
