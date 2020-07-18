@@ -1,4 +1,4 @@
-class Api::V1::DocumentsController < ApplicationController
+class API::V1::DocumentsController < ApplicationController
 
 	def index
     @user=User.find_by(:id => params[:id])
